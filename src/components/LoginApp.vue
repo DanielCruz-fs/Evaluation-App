@@ -7,13 +7,13 @@
             </div>
          </div>
          <div class="form-box-ml">
-            <form action="home.html" autocomplete="off" method="post">
+            <form @submit.prevent="login" autocomplete="off" method="post">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
-                <input class="mdl-textfield__input" type="text" id="email" v-model="email">
+                <input class="mdl-textfield__input" type="email" id="email" v-model="loginUser.username">
                 <label class="mdl-textfield__label" for="email">Correo</label>
               </div>
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
-                <input class="mdl-textfield__input" type="text" id="password" v-model="password">
+                <input class="mdl-textfield__input" type="password" id="password" v-model="loginUser.password">
                 <label class="mdl-textfield__label" for="password">Contraseña</label>
               </div>
                <div class="center pd-top20">
@@ -33,9 +33,19 @@ export default {
   name: 'LoginApp',
   data(){
      return{
-         email:'',
-         password:''
+         loginUser:{
+           client_id: 2,
+           client_secret: 'rHtbmFOmkOJaoHxhQWtIJSUhfMpDwZhU5A0Xw1eZ',
+           grant_type: 'password',
+           username: '',
+           password: ''
+         }
      }
+    },
+    methods:{
+         login(){
+             this.$http.post('http://localhost:8000/oauth/token', this.loginUser).then(res => console.log(res));
+         }
   }
 }
 </script>
