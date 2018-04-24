@@ -10,6 +10,18 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Auth)
 
+router.beforeEach(
+   (to, from, next) => {
+      if(to.matched.some(record => record.meta.forVisitors)) {
+         if(Vue.auth.isAuthenticated()){
+             next({
+                 path: '/form'
+             })
+         } else next()
+      } else next()
+   }
+)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
