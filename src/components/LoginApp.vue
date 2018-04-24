@@ -35,7 +35,7 @@ export default {
      return{
          loginUser:{
            client_id: 2,
-           client_secret: 'rHtbmFOmkOJaoHxhQWtIJSUhfMpDwZhU5A0Xw1eZ',
+           client_secret: 'aSUpk20sfJjF947eHj2OzJWwBcyPe2Q2QKb3jZAu',
            grant_type: 'password',
            username: '',
            password: ''
@@ -44,7 +44,11 @@ export default {
     },
     methods:{
          login(){
-             this.$http.post('http://localhost:8000/oauth/token', this.loginUser).then(res => console.log(res));
+             this.$http.post('http://localhost:8000/oauth/token', this.loginUser)
+             .then(res => {
+                this.$auth.setToken(res.body.access_token, res.body.expires_in + Date.now());
+                console.log(res);
+             }).catch(error => console.log(error.response.data));
          }
   }
 }
