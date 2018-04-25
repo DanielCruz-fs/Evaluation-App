@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LoginApp from '@/components/LoginApp'
-import Feed from '@/components/Form'
+import FormApp from '@/components/FormApp'
 
 Vue.use(Router)
 
@@ -17,7 +17,11 @@ export default new Router({
     },
     {
        path: '/form',
-       component: Feed
+       name: 'FormApp',
+       component: FormApp,
+       meta:{
+         forAuth : true
+       }
     }
   ]
 })

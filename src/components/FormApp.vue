@@ -50,12 +50,15 @@
                <input type="hidden" value="" name="sample3">
                <label for="sample3" class="mdl-textfield__label">Facultad</label>
                <ul for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1">Ingeniería</li>
-                  <li class="mdl-menu__item" data-val="2">Ciencias de la salud</li>
-                  <li class="mdl-menu__item" data-val="3">Economía</li>
+                  <li class="mdl-menu__item" data-val="1" v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</li>
                </ul>
             </div>
           </ul>
+
+          <select>
+  <option v-for="faculty in faculties" :key="faculty.id" value="volvo">{{faculty.name}}</option>
+
+</select>
 
           <ul class="demo-list-control mdl-list pd-10-ml">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
@@ -124,7 +127,16 @@
 
 <script>
 export default {
-
+   name: 'FormApp',
+   data() {
+      return{
+         faculties: []
+      }
+   },
+   created () {
+       this.$http.get('api/facultades').then(response => this.faculties = response.body)
+       .catch(error => console.log(error.response.data));
+   }
 }
 </script>
 

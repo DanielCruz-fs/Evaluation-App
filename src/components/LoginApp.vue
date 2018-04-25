@@ -1,4 +1,5 @@
 <template>
+<div>
    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <div class="android-content mdl-layout__content">
         <div class="demo-card-wide mdl-card">
@@ -26,6 +27,7 @@
          </div>
       </div>
    </div>
+   </div>
 </template>
 
 <script>
@@ -44,10 +46,11 @@ export default {
     },
     methods:{
          login(){
-             this.$http.post('http://localhost:8000/oauth/token', this.loginUser)
+             this.$http.post('oauth/token', this.loginUser)
              .then(res => {
                 this.$auth.setToken(res.body.access_token, res.body.expires_in + Date.now());
                 console.log(res);
+                this.$router.push("/form");
              }).catch(error => console.log(error.response.data));
          }
   }

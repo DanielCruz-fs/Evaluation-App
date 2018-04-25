@@ -10,6 +10,9 @@ Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Auth)
 
+Vue.http.options.root = 'http://localhost:8000'
+Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
+
 router.beforeEach(
    (to, from, next) => {
       if(to.matched.some(record => record.meta.forVisitors)) {
@@ -18,7 +21,15 @@ router.beforeEach(
                  path: '/form'
              })
          } else next()
-      } else next()
+      } 
+      else if(to.matched.some(record => record.meta.forAuth)) {
+        if(!Vue.auth.isAuthenticated()){
+            next({
+                path: '/'
+            })
+        } else next()
+     } 
+      else next()
    }
 )
 
