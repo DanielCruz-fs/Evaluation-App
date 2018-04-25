@@ -44,68 +44,69 @@
 
       <div class="android-content mdl-layout__content bg-fa"> 
 
-         <ul class="demo-list-control mdl-list pd-10-ml">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
-               <input type="text" value="" class="mdl-textfield__input" id="sample3" readonly>
-               <input type="hidden" value="" name="sample3">
-               <label for="sample3" class="mdl-textfield__label">Facultad</label>
-               <ul for="sample3" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1" v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</li>
-               </ul>
-            </div>
-          </ul>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="faculty" name="faculty">
+              <option></option>
+              <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="faculty">Facultad</label>
+          </div>
 
-          <select>
-  <option v-for="faculty in faculties" :key="faculty.id" value="volvo">{{faculty.name}}</option>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="career" name="career">
+              <option></option>
+              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
+              <option value="87">Sistemas</option>
+              <option value="89">Comercial</option>
+              <option value="91">Economica</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="career">Carrera</label>
+          </div>
 
-</select>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="subject" name="subject">
+              <option></option>
+              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
+              <option value="87">Calculo 1</option>
+              <option value="89">Calculo 2</option>
+              <option value="91">Redes</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="subject">Asignatura</label>
+          </div>
 
-          <ul class="demo-list-control mdl-list pd-10-ml">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
-               <input type="text" value="" class="mdl-textfield__input" id="sample1" readonly>
-               <input type="hidden" value="" name="sample1">
-               <label for="sample1" class="mdl-textfield__label">Carrera</label>
-               <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1">Ingeniería de Sistemas</li>
-               </ul>
-            </div>
-          </ul>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="subject" name="subject">
+              <option></option>
+              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
+              <option value="87">Paralelo 1</option>
+              <option value="89">Paralelo 2</option>
+              <option value="91">Paralelo 3</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="parallel">Paralelo</label>
+          </div>
 
-          <ul class="demo-list-control mdl-list pd-10-ml">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
-               <input type="text" value="" class="mdl-textfield__input" id="sample2" readonly>
-               <input type="hidden" value="" name="sample2">
-               <label for="sample2" class="mdl-textfield__label">Asignatura</label>
-               <ul for="sample2" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1">Calculo I</li>
-                  <li class="mdl-menu__item" data-val="1">Calculo II</li>
-               </ul>
-            </div>
-          </ul>
 
-          <ul class="demo-list-control mdl-list pd-10-ml">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
-               <input type="text" value="" class="mdl-textfield__input" id="sample10" readonly>
-               <input type="hidden" value="" name="sample10">
-               <label for="sample10" class="mdl-textfield__label">Docente</label>
-               <ul for="sample10" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1">Jhon Smith</li>
-                  <li class="mdl-menu__item" data-val="1">Jhon Vega</li>
-               </ul>
-            </div>
-          </ul>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="professor" name="professor">
+              <option></option>
+              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
+              <option value="87">Jhon Smith</option>
+              <option value="89">Alberto Bravo</option>
+              <option value="91">Yiang Yen</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="professor">Docente</label>
+          </div>
 
-          <ul class="demo-list-control mdl-list pd-10-ml">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select width-100">
-               <input type="text" value="" class="mdl-textfield__input" id="sample5" readonly>
-               <input type="hidden" value="" name="sample5">
-               <label for="sample5" class="mdl-textfield__label">Gestión</label>
-               <ul for="sample5" class="mdl-menu mdl-menu--bottom-left mdl-js-menu width-100">
-                  <li class="mdl-menu__item" data-val="1">1/2018</li>
-                  <li class="mdl-menu__item" data-val="1">2/2018</li>
-               </ul>
-            </div>
-          </ul>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
+            <select class="mdl-textfield__input" id="professor" name="professor">
+              <option></option>
+              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
+              <option value="87">1/2018</option>
+              <option value="89">2/2018</option>
+              <option value="91">3/2018</option>
+            </select>
+            <label class="mdl-textfield__label pd-10-ml" for="professor">Gestion</label>
+          </div>
 
           <ul class="demo-list-control mdl-list pd-10-ml">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
