@@ -1,4 +1,5 @@
 <template>
+<div>
      <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       
       <div class="nav-background">
@@ -124,6 +125,7 @@
 
       </div>
    </div>
+   </div>
 </template>
 
 <script>
@@ -136,7 +138,7 @@ export default {
    },
    created () {
        this.$http.get('api/facultades').then(response => this.faculties = response.body)
-       .catch(error => console.log(error.response.data));
+       .catch(error => console.log(error.response.body));
    }
 }
 </script>

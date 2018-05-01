@@ -8,7 +8,7 @@
             </div>
          </div>
          <div class="form-box-ml">
-            <form @submit.prevent="login" autocomplete="off" method="post">
+            <form @submit.prevent="login" method="post">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
                 <input class="mdl-textfield__input" type="email" id="email" v-model="loginUser.username">
                 <label class="mdl-textfield__label" for="email">Correo</label>
@@ -37,7 +37,7 @@ export default {
      return{
          loginUser:{
            client_id: 2,
-           client_secret: 'aSUpk20sfJjF947eHj2OzJWwBcyPe2Q2QKb3jZAu',
+           client_secret: 'cHm5Uxtpub2UKkrS1Rkv2GpvHbmCu5faakZztXOy',
            grant_type: 'password',
            username: '',
            password: ''
@@ -49,8 +49,10 @@ export default {
              this.$http.post('oauth/token', this.loginUser)
              .then(res => {
                 this.$auth.setToken(res.body.access_token, res.body.expires_in + Date.now());
-                console.log(res);
-                this.$router.push("/form");
+             
+                // this.$router.push("/form");
+                // this.$router.push({name: 'FormApp'});
+                window.location = '/form';
              }).catch(error => console.log(error.response.data));
          }
   }

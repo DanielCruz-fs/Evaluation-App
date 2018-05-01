@@ -6,6 +6,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 import Auth from './packages/auth/Auth.js'
 
+
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Auth)
@@ -40,3 +41,5 @@ new Vue({
   components: { App },
   template: '<App/>'
 })
+
+
