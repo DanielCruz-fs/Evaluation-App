@@ -5,24 +5,22 @@
        <background-app></background-app>
        <top-app></top-app>
        <side-app></side-app>
-       
+
       <div class="android-content mdl-layout__content bg-fa"> 
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
-            <select class="mdl-textfield__input" id="faculty" name="faculty">
-              <option></option>
-              <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option>
+            <select class="mdl-textfield__input" id="faculty" v-model="getFacultyId" v-on:change="filterCareersByFaculty()">
+              <option disabled>Elige Una Facultad</option>
+              <option v-for="faculty in faculties" :key="faculty.id" :value="faculty.id">{{faculty.name}}</option>
             </select>
             <label class="mdl-textfield__label pd-10-ml" for="faculty">Facultad</label>
           </div>
 
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
             <select class="mdl-textfield__input" id="career" name="career">
+              <!-- <option selected>xxxxx</option> -->
               <option></option>
-              <!-- <option v-for="faculty in faculties" :key="faculty.id">{{faculty.name}}</option> -->
-              <option value="87">Sistemas</option>
-              <option value="89">Comercial</option>
-              <option value="91">Economica</option>
+              <option v-for="career in careers" :key="career.id">{{career.name}}</option>
             </select>
             <label class="mdl-textfield__label pd-10-ml" for="career">Carrera</label>
           </div>
@@ -101,12 +99,23 @@ export default {
    name: 'FormApp',
    data() {
       return{
-         faculties: []
+         faculties: [],
+         careers: [],
+         getFacultyId: ''
       }
    },
    created () {
-       this.$http.get('api/facultades').then(response => this.faculties = response.body)
+       this.$http.get('api/faculties').then(response => this.faculties = response.body)
        .catch(error => console.log(error.response.body));
+   },
+   methods: {
+       filterCareersByFaculty(){
+           this.$http.get('api/careers/'+ this.getFacultyId).then(response => {
+              //  console.log(response.body);
+              //  console.log(this.getFacultyId);
+               this.careers = response.body;
+           }).catch(error => console.log(error.response.body));
+       }
    }
 }
 </script>
