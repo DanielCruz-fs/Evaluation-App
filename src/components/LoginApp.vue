@@ -50,10 +50,12 @@ export default {
              .then(res => {
                 this.$auth.setToken(res.body.access_token, res.body.expires_in + Date.now());
              
-                // this.$router.push("/form");
+                 
                 // this.$router.push({name: 'FormApp'});
-                window.location = '/form';
+                 window.location = '/form';
+                 //this.$router.push({ path: '/form/select'});
              }).catch(error => console.log(error.response.data));
+             
          }
   }
 }
