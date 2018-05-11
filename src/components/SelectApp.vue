@@ -19,7 +19,7 @@
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
     <select class="mdl-textfield__input" id="subject" v-model="getSubjectId" v-on:change="filterParallelsBySubjectAndCareer()">
       <option></option>
-      <option v-for="subject in subjects" :key="subject.subject_id" :value="subject.subject_id">{{subject.name}}</option>
+      <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{subject.name}}</option>
     </select>
     <label class="mdl-textfield__label pd-10-ml" for="subject">Asignatura</label>
   </div>
@@ -27,7 +27,7 @@
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
     <select class="mdl-textfield__input" id="subject" name="subject" v-model="getParallelId" v-on:change="filterProfessorsBySubjectAndParallel()">
       <option></option>
-      <option v-for="parallel in parallels" :key="parallel.paralleel_id" :value="parallel.parallel_id">{{parallel.detail}}</option>
+      <option v-for="parallel in parallels" :key="parallel.id" :value="parallel.id">{{parallel.detail}}</option>
     </select>
     <label class="mdl-textfield__label pd-10-ml" for="parallel">Paralelo</label>
   </div>
@@ -36,7 +36,7 @@
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label width-100">
     <select class="mdl-textfield__input" id="professor" v-model="getProfessorId">
       <option></option>
-      <option v-for="professor in professors" :key="professor.professor_id" :value="professor.professor_id">
+      <option v-for="professor in professors" :key="professor.id" :value="professor.id">
         {{professor.name}} {{professor.lastname_p}} {{professor.lastname_s}}
       </option>
     </select>
@@ -61,7 +61,7 @@
   </ul>
 
   <div class="center pd-bm-20">
-    <router-link to="/form/check" class="btn-ml-submit blue-ml">Aceptar</router-link>
+    <a class="btn-ml-submit blue-ml" @click="getAssignmentId()">Aceptar</a>
   </div>
 </div>
 </template>
@@ -82,6 +82,7 @@ export default {
          getParallelId: '',
          getProfessorId: '',
          getManagementId: '',
+         getAssignmentIdEvaluation: '',
          currentDate: new Date().toLocaleString()
       }
    },
@@ -111,6 +112,18 @@ export default {
            this.$http.get('api/professors/'+ this.getSubjectId + '/' + this.getParallelId)
            .then(response => this.professors = response.body)
            .catch(error => console.log(error.response.body));
+       },
+       getAssignmentId(){
+           this.$http.get('api/assignmentId/'+ this.getCareerId + '/' + this.getSubjectId + '/' + this.getProfessorId + 
+           '/' + this.getParallelId)
+           .then(response => {
+               this.getAssignmentIdEvaluation = response.body.id;
+               let assignmentId = this.getAssignmentIdEvaluation;
+               let managementId = this.getManagementId;
+              //  console.log(assignmentId);
+              //  console.log(managementId);
+               this.$router.push({ name : 'form/check', params: { assignmentId, managementId }});
+           }).catch(error => console.log(error.response.body));
        }
    }
 }

@@ -30,6 +30,7 @@ export default new Router({
          },
          {
              path: 'check',
+             name: 'form/check',
              component: CheckApp
          }
        ]
