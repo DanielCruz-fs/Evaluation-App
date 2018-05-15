@@ -29,7 +29,7 @@ export default new Router({
              component: SelectApp
          },
          {
-             path: 'check',
+             path: 'check/:assignmentId/:managementId',
              name: 'form/check',
              component: CheckApp
          }

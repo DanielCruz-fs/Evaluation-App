@@ -1,122 +1,64 @@
 <template>
 <div>
-     <p class="p-title-ml"> Inicio</p>
-
-         <ul class="demo-list-control mdl-list pd-10-ml">
-            <li class="mdl-list__item list-ml left-margin-color01">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Desarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t1" class="Toggle-input">
-                      <label for="t1" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-            <li class="mdl-list__item list-ml left-margin-color02">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Desarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t-1" class="Toggle-input">
-                      <label for="t-1" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-            <li class="mdl-list__item list-ml left-margin-color01">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Desarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t_1" class="Toggle-input">
-                      <label for="t_1" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-         </ul>
-
-         <p class="p-title-ml-s"> Desarrollo</p>
-
-         <ul class="demo-list-control mdl-list pd-10-ml">
-            <li class="mdl-list__item list-ml left-margin-color01">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Lesarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t2" class="Toggle-input">
-                      <label for="t2" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-            <li class="mdl-list__item list-ml left-margin-color02">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Desarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t-2" class="Toggle-input">
-                      <label for="t-2" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-         </ul>
-
-         <p class="p-title-ml-s"> Cierre</p>
-
-         <ul class="demo-list-control mdl-list pd-10-ml">
-            <li class="mdl-list__item list-ml left-margin-color01">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Bob Odenkirk
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t3" class="Toggle-input">
-                      <label for="t3" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-            <li class="mdl-list__item list-ml left-margin-color02">
-               <span class="mdl-list__item-primary-content color-ml-list font-14">
-                  Desarrolla tema de acuerdo con lo planificado
-               </span>
-               <span class="mdl-list__item-secondary-action">
-                  <div class="Toggle">
-                      <input type="checkbox" id="t-3" class="Toggle-input">
-                      <label for="t-3" class="Toggle-label">Toggle</label>
-                  </div>
-               </span>
-            </li>
-
-         </ul>
-
+         <category-app v-for="category in categories" :key="category.id" :data=category></category-app>
          <p class="p-title-ml-s">Recomendación</p>
          
          <ul class="demo-list-control mdl-list pd-10-ml">
          <div class="mdl-textfield mdl-js-textfield width-100 textarea-recom-ml">
-            <textarea class="mdl-textfield__input bg-fff heigth-150" type="text" rows= "3" id="sample5" ></textarea>
+            <textarea class="mdl-textfield__input bg-fff heigth-150" type="text" rows= "3" v-model="form.recommendation"></textarea>
          </div>
       </ul>
 
          <div class="center btn-top35">
-            <a href="home.html" class="btn-ml-submit blue-ml">Aceptar</a>
+            <a @click="saveEvaluation()" class="btn-ml-submit blue-ml">Aceptar</a>
          </div>
 </div>
 </template>
 
 <script>
+import CategoryApp from './CategoryApp';
 export default {
-
+     components: { CategoryApp },
+     data(){
+          return{
+             form:{
+                 recommendation:null
+             },
+             User:{},
+             categories: [],
+             arrayDetails: []
+          }
+     },
+     created(){
+         this.setAuthenticatedUser();
+         this.$http.get('api/categories').then(response => this.categories = response.body)
+         .catch(error => console.log(error.response.body));
+     },
+     methods:{
+         setAuthenticatedUser(){
+         this.$http.get('api/user').then(response => {
+             this.$auth.setAuthenticatedUser(response.body);
+             this.User = this.$auth.getAuthenticatedUser();
+             });
+         },
+         saveEvaluation(){
+         let userId = this.User.id;
+         
+         this.$http.post('api/saveEvaluation/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
+         + '/' + userId, this.form).then(response => console.log(response.body))
+         .catch(error => console.log(error.response.body));
+         // getting evaluation id for indicators
+         this.$http.get('api/evaluationId/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
+         + '/' + userId).then(response => {
+             console.log(response.body);
+             //Trigger for child category components arrayDetails
+             EventBus.$emit('saveIndicators', response.body);
+         }).catch(error => console.log(error.response.body));
+         }
+     }
 }
 </script>
-
 <style scoped>
-label.Toggle-label{
-     background-color: silver;
-}
 textarea{
      background-color: lightgrey;
 }

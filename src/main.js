@@ -10,6 +10,7 @@ import Auth from './packages/auth/Auth.js'
 Vue.config.productionTip = false
 Vue.use(VueResource)
 Vue.use(Auth)
+window.EventBus = new Vue()
 
 Vue.http.options.root = 'http://localhost:8000'
 Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
