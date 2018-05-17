@@ -41,7 +41,7 @@ export default {
               EventBus.$on('saveIndicators', (evaluationId) => {
                 //  console.log(this.checkedDetails);
                 //  console.log(evaluationId);
-                 this.$http.post('api/saveIndicators/' + evaluationId, {params: {arrayDetails: this.checkedDetails }})
+                 this.$http.post('api/saveIndicators/' + evaluationId, this.$data)
                  .then(response => console.log(response.body))
                  .catch(error => console.log(error.response.body));
  	 	 	 });

@@ -50,9 +50,9 @@ export default {
          // getting evaluation id for indicators
          this.$http.get('api/evaluationId/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
          + '/' + userId).then(response => {
-             console.log(response.body);
+             console.log(response.body.id);
              //Trigger for child category components arrayDetails
-             EventBus.$emit('saveIndicators', response.body);
+             EventBus.$emit('saveIndicators', response.body.id);
          }).catch(error => console.log(error.response.body));
          }
      }
