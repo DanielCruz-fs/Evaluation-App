@@ -11,7 +11,7 @@
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="career">Carrera :</label>
     <select class="mdl-textfield__input" id="career" v-model="getCareerId" v-on:change="filterSubjectsByCareer()">
-      <option></option>
+      <option disabled>Elige Una Carrera</option>
       <option v-for="career in careers" :key="career.id" :value="career.id">{{career.name}}</option>
     </select>
   </div>
@@ -19,7 +19,7 @@
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="subject">Asignatura :</label>
     <select class="mdl-textfield__input" id="subject" v-model="getSubjectId" v-on:change="filterParallelsBySubjectAndCareer()">
-      <option></option>
+      <option disabled>Elige Una Asignatura</option>
       <option v-for="subject in subjects" :key="subject.id" :value="subject.id">{{subject.name}}</option>
     </select>
   </div>
@@ -27,7 +27,7 @@
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="parallel">Paralelo :</label>
     <select class="mdl-textfield__input" id="subject" name="subject" v-model="getParallelId" v-on:change="filterProfessorsBySubjectAndParallel()">
-      <option></option>
+      <option disabled>Elige Un Paralelo</option>
       <option v-for="parallel in parallels" :key="parallel.id" :value="parallel.id">{{parallel.detail}}</option>
     </select>
   </div>
@@ -36,7 +36,7 @@
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="professor">Docente :</label>
     <select class="mdl-textfield__input" id="professor" v-model="getProfessorId">
-      <option></option>
+      <option disabled>Elige Un Docente</option>
       <option v-for="professor in professors" :key="professor.id" :value="professor.id">
         {{professor.name}} {{professor.lastname_p}} {{professor.lastname_s}}
       </option>
@@ -46,7 +46,7 @@
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="professor">Gestion :</label>
     <select class="mdl-textfield__input" id="management" v-model="getManagementId">
-      <option></option>
+      <option disabled>Gestion Actual</option>
       <option v-for="management in managements" :key="management.id" :value="management.id">
          {{management.number}}/{{management.year}}
       </option>
@@ -60,7 +60,8 @@
 
 
   <div class="center pd-bm-20 selectSaveButton">
-    <a class="btn-ml-submit blue-ml" @click="getAssignmentId()">Aceptar</a>
+    <a class="btn-ml-submit blue-ml" @click="getAssignmentId()" v-show="getFacultyId && getCareerId && getSubjectId
+     && getParallelId && getProfessorId && getManagementId">Aceptar</a>
   </div>
 </div>
 </template>
@@ -131,9 +132,6 @@ export default {
 <style scoped>
 label{
    margin-left: -5px;
-}
-select{
-   background-color: blanchedalmond;
 }
 div.currentDate{
    margin-top: -23px;

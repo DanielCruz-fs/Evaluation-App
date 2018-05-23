@@ -54,6 +54,8 @@ export default {
              //Trigger for child category components arrayDetails
              EventBus.$emit('saveIndicators', response.body.id);
          }).catch(error => console.log(error.response.body));
+         //after saving everything we reirect user to main view
+         this.$router.push('/form');
          }
      }
 }

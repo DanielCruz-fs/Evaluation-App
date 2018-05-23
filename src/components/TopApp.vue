@@ -1,6 +1,4 @@
-<template>
-
-     
+<template> 
       <div class="android-header mdl-layout__header mdl-layout__header--waterfall border-btm-1">
          
          <div class="mdl-layout__header-row">
@@ -9,18 +7,25 @@
                <i class="material-icons">more_vert</i>
             </button>
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-               <li class="mdl-menu__item"><a href="index.html">Salir</a></li>
+               <li class="mdl-menu__item"><a @click="logOut()">Salir</a></li>
             </ul>
          </div>
       </div>
-
-      
-
 </template>
 
 <script>
 export default {
+     data(){
+         return{
 
+         }
+     },
+     methods:{
+         logOut(){
+             this.$auth.destroyToken();
+             window.location = '/';
+         }
+     }
 }
 </script>
 
