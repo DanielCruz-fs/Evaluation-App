@@ -1,27 +1,26 @@
 <template>
-  <div class="android-drawer mdl-layout__drawer">
+  <div class="android-drawer mdl-layout__drawer" id="drawer">
          <span class="mdl-layout-title">
             <div class="background">
                <img src="../assets/back.jpg">
             </div>
             {{User.name}} {{User.lastname_p}} {{User.lastname_s}}<br>
             {{User.email}}
-            <!-- <img class="android-logo-image" src="images/android-logo-white.png"> -->
          </span>
          <nav class="mdl-navigation">
             <router-link class="mdl-navigation__link" to="/form">
-               <i class="material-icons pdr-10px" role="presentation">home</i>
-               Inicio
+               <p @click="hideSidebar()"><i class="material-icons pdr-10px" role="presentation">home</i>
+               Inicio</p>
             </router-link>
-            <a class="mdl-navigation__link" href="">
-               <i class="material-icons pdr-10px" role="presentation">settings</i>
-               Configuración
-            </a>
+            <router-link class="mdl-navigation__link" to="/form/setting">
+               <p @click="hideSidebar()"><i class="material-icons pdr-10px" role="presentation">settings</i>
+               Configuración</p>
+            </router-link>
             <div class="android-drawer-separator"></div>
-            <a class="mdl-navigation__link" href="">
-               <i class="material-icons pdr-10px" role="presentation">info</i>
-               Acerca de
-            </a>
+            <router-link class="mdl-navigation__link" to="/form/about">
+               <p @click="hideSidebar()"><i class="material-icons pdr-10px" role="presentation">info</i>
+               Acerca de</p>
+            </router-link>
          </nav>
       </div>
 </template>
@@ -42,6 +41,12 @@ export default {
              this.$auth.setAuthenticatedUser(response.body);
              this.User = this.$auth.getAuthenticatedUser();
          });
+     },
+     hideSidebar(){
+         document.querySelector('.mdl-layout__drawer').addEventListener('click', function () {
+         document.querySelector('.mdl-layout__obfuscator').classList.remove('is-visible');
+         this.classList.remove('is-visible');
+         }, false);    
      }
    }
 }

@@ -4,6 +4,8 @@ import LoginApp from '@/components/LoginApp'
 import FormApp from '@/components/FormApp'
 import SelectApp from '@/components/SelectApp'
 import CheckApp from '@/components/CheckApp'
+import SettingApp from '@/components/SettingApp'
+import AboutApp from '@/components/AboutApp'
 
 Vue.use(Router)
 
@@ -32,6 +34,14 @@ export default new Router({
              path: 'check/:assignmentId/:managementId',
              name: 'form/check',
              component: CheckApp
+         },
+         {
+          path: 'setting',
+          component: SettingApp
+         },
+         {
+          path: 'about',
+          component: AboutApp
          }
        ]
     }

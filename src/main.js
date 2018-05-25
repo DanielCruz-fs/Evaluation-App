@@ -13,6 +13,7 @@ Vue.use(Auth)
 window.EventBus = new Vue()
 
 Vue.http.options.root = 'http://localhost:8000'
+//Vue.http.options.root = 'http://app-unifranz.herokuapp.com'
 Vue.http.headers.common['Authorization'] = 'Bearer ' + Vue.auth.getToken()
 
 router.beforeEach(
