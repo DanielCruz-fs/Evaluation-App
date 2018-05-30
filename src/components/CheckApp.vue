@@ -1,5 +1,7 @@
 <template>
 <div>
+    <p id="professor" class="p-title-ml-s">{{professor.lastname_p}} {{professor.lastname_s}} {{professor.name}}</p>
+
          <category-app v-for="category in categories" :key="category.id" :data=category></category-app>
          <p class="p-title-ml-s">Recomendación</p>
          
@@ -24,6 +26,7 @@ export default {
              form:{
                  recommendation:null
              },
+             professor: {},
              User:{},
              categories: [],
              arrayDetails: []
@@ -32,6 +35,8 @@ export default {
      created(){
          this.setAuthenticatedUser();
          this.$http.get('api/categories').then(response => this.categories = response.body)
+         .catch(error => console.log(error.response.body));
+         this.$http.get('api/getProfessor/' + this.$route.params.professorId).then(response => this.professor = response.body)
          .catch(error => console.log(error.response.body));
      },
      methods:{
@@ -63,5 +68,8 @@ export default {
 <style scoped>
 textarea{
      background-color: lightgrey;
+}
+#professor{
+     text-align: center;
 }
 </style>

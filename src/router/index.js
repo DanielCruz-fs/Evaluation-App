@@ -31,7 +31,7 @@ export default new Router({
              component: SelectApp
          },
          {
-             path: 'check/:assignmentId/:managementId',
+             path: 'check/:assignmentId/:managementId/:professorId',
              name: 'form/check',
              component: CheckApp
          },
@@ -45,5 +45,6 @@ export default new Router({
          }
        ]
     }
-  ]
+  ],
+  mode : 'history'
 })

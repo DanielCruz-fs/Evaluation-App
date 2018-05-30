@@ -7,7 +7,7 @@
                <i class="material-icons">more_vert</i>
             </button>
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-               <li class="mdl-menu__item"><a @click="logOut()">Salir</a></li>
+               <li class="mdl-menu__item" @click="logOut()">Salir</li>
             </ul>
          </div>
       </div>

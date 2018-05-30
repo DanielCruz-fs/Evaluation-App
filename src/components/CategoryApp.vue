@@ -38,7 +38,7 @@ export default {
      },
      methods:{
          listen(){
-              EventBus.$on('saveIndicators', (evaluationId) => {
+              EventBus.$once('saveIndicators', (evaluationId) => {
                 //  console.log(this.checkedDetails);
                 //  console.log(evaluationId);
                  this.$http.post('api/saveIndicators/' + evaluationId, this.$data)

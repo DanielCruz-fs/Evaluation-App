@@ -98,20 +98,35 @@ export default {
            this.$http.get('api/careers/'+ this.getFacultyId).then(response => {
                this.careers = response.body;
            }).catch(error => console.log(error.response.body));
+           // we clean some properties
+           this.getCareerId  = '';
+           this.getSubjectId = '';
+           this.getParallelId = '';
+           this.getProfessorId = '';
+           this.getManagementId = '';
        },
        filterSubjectsByCareer(){
            this.$http.get('api/subjects/'+ this.getCareerId).then(response => this.subjects = response.body)
            .catch(error => console.log(error.response.body));
+           this.getSubjectId = '';
+           this.getParallelId = '';
+           this.getProfessorId = '';
+           this.getManagementId = '';
        },
        filterParallelsBySubjectAndCareer(){
            this.$http.get('api/parallels/'+ this.getCareerId + '/' + this.getSubjectId)
            .then(response => this.parallels = response.body)
            .catch(error => console.log(error.response.body));
+           this.getParallelId = '';
+           this.getProfessorId = '';
+           this.getManagementId = '';
        },
        filterProfessorsBySubjectAndParallel(){
            this.$http.get('api/professors/'+ this.getSubjectId + '/' + this.getParallelId)
            .then(response => this.professors = response.body)
            .catch(error => console.log(error.response.body));
+           this.getProfessorId = '';
+           this.getManagementId = '';
        },
        getAssignmentId(){
            this.$http.get('api/assignmentId/'+ this.getCareerId + '/' + this.getSubjectId + '/' + this.getProfessorId + 
@@ -120,9 +135,10 @@ export default {
                this.getAssignmentIdEvaluation = response.body.id;
                let assignmentId = this.getAssignmentIdEvaluation;
                let managementId = this.getManagementId;
+               let professorId = this.getProfessorId;
               //  console.log(assignmentId);
               //  console.log(managementId);
-               this.$router.push({ name : 'form/check', params: { assignmentId, managementId }});
+               this.$router.push({ name : 'form/check', params: { assignmentId, managementId, professorId }});
            }).catch(error => console.log(error.response.body));
        }
    }

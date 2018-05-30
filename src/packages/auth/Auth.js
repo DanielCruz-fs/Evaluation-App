@@ -4,6 +4,7 @@ export default (Vue) => {
           setToken(token, expiration) {
              localStorage.setItem('token', token);
              localStorage.setItem('expiration', expiration);
+             window.location = '/form';
              
           },
           destroyToken() {
