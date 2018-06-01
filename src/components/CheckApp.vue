@@ -47,20 +47,43 @@ export default {
              });
          },
          saveEvaluation(){
-         let userId = this.User.id;
-         
-         this.$http.post('api/saveEvaluation/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
-         + '/' + userId, this.form).then(response => console.log(response.body))
-         .catch(error => console.log(error.response.body));
-         // getting evaluation id for indicators
-         this.$http.get('api/evaluationId/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
-         + '/' + userId).then(response => {
-             console.log(response.body.id);
-             //Trigger for child category components arrayDetails
-             EventBus.$emit('saveIndicators', response.body.id);
-         }).catch(error => console.log(error.response.body));
-         //after saving everything we reirect user to main view
-         this.$router.push('/form');
+             this.$swal({
+                 title: 'Está seguro?',
+                 text: 'La Evaluación se guardará',
+                 type: 'warning',
+                 showCancelButton: true,
+                 confirmButtonText: 'Si!',
+                 confirmButtonColor: '#3da6dd',
+                 cancelButtonText: 'No!',
+                 showCloseButton: true,
+                 showLoaderOnConfirm: true
+                 }).then((result) => {
+                 if(result.value) {
+           
+                 let userId = this.User.id;
+                 this.$http.post('api/saveEvaluation/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
+                 + '/' + userId, this.form).then(response => console.log(response.body))
+                 .catch(error => console.log(error.response.body));
+                 // getting evaluation id for indicators
+                 this.$http.get('api/evaluationId/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
+                 + '/' + userId).then(response => {
+                 console.log(response.body.id);
+                 //Trigger for child category components arrayDetails
+                 EventBus.$emit('saveIndicators', response.body.id);
+                }).catch(error => console.log(error.response.body));
+                //after saving everything we reirect user to main view
+                this.$router.push('/form'); 
+           
+                 } else {
+                 this.$swal({
+                 type: 'info',
+                 title: 'Cancelado',
+                 text: 'La Evaluación aún no se guardo',
+                 confirmButtonColor: '#3da6dd',
+                 });
+                 }
+                 });
+        
          }
      }
 }

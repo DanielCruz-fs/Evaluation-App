@@ -19,9 +19,6 @@
               </div>
                <div class="center pd-top20">
                   <button class="btn-ml blue-ml">Ingresar</button>
-                  <div class="pd-top20">
-                     <a href="" class="p-respass">¿Olvidaste tu contraseña?</a>
-                  </div>
                </div>
             </form>
          </div>
@@ -50,10 +47,18 @@ export default {
              this.$http.post('oauth/token', this.loginUser)
              .then(res => {
                 this.$auth.setToken(res.body.access_token, res.body.expires_in + Date.now());
-                // this.$router.push({name: 'FormApp'});
+                 // this.$router.push({name: 'FormApp'});
                  //window.location = '/form';
                  //this.$router.push({ path: '/form/select'});
-             }).catch(error => console.log(error.response.data));
+             }).catch(error => {
+                 //console.log(error.response.data);
+                 this.$swal({
+                 type: 'error',
+                 title: 'Oops...',
+                 text: 'Credenciales Incorrectos!',
+                 confirmButtonColor: '#3da6dd',
+                 });
+             });
              
          }
   }
