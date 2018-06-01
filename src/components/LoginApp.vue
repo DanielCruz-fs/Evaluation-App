@@ -54,7 +54,7 @@ export default {
                  //console.log(error.response.data);
                  this.$swal({
                  type: 'error',
-                 title: 'Oops...',
+                 title: 'Error',
                  text: 'Credenciales Incorrectos!',
                  confirmButtonColor: '#3da6dd',
                  });

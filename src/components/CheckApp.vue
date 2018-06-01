@@ -55,8 +55,7 @@ export default {
                  confirmButtonText: 'Si!',
                  confirmButtonColor: '#3da6dd',
                  cancelButtonText: 'No!',
-                 showCloseButton: true,
-                 showLoaderOnConfirm: true
+                 showCloseButton: true
                  }).then((result) => {
                  if(result.value) {
            
@@ -71,6 +70,12 @@ export default {
                  //Trigger for child category components arrayDetails
                  EventBus.$emit('saveIndicators', response.body.id);
                 }).catch(error => console.log(error.response.body));
+                 this.$swal({
+                 type: 'success',
+                 title: 'Registrado',
+                 text: 'La Evaluación se guardo con éxito',
+                 confirmButtonColor: '#3da6dd',
+                 });
                 //after saving everything we reirect user to main view
                 this.$router.push('/form'); 
            
