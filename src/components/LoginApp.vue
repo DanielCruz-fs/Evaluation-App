@@ -35,7 +35,7 @@ export default {
          loginUser:{
            client_id: 2,
            client_secret: 'cHm5Uxtpub2UKkrS1Rkv2GpvHbmCu5faakZztXOy', //localhost
-           //client_secret: 'wEIJw7IwTQK1YBjRfVpyCLVnQ2jJA4xa6OszaBIf',   //heroku
+           //client_secret: 'Wyb0R5jIiBlKwvKqfgtfriZWXW5HistsShQvN6r8',   //heroku
            grant_type: 'password',
            username: '',
            password: ''

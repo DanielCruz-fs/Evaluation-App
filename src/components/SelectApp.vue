@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="select-frame">
   <div class="mdl-textfield mdl-js-textfield width-100">
     <label class="p-title-ml" for="faculty">Facultad :</label>
     <select class="mdl-textfield__input" id="faculty" v-model="getFacultyId" v-on:change="filterCareersByFaculty()">
@@ -154,5 +154,8 @@ div.currentDate{
 }
 div.selectSaveButton{
    margin-top: -8px;
+}
+#select-frame{
+   padding: 6px 15px;
 }
 </style>

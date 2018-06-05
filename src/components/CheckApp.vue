@@ -1,6 +1,6 @@
 <template>
 <div>
-    <p id="professor" class="p-title-ml-s">{{professor.lastname_p}} {{professor.lastname_s}} {{professor.name}}</p>
+    <p id="professor-title" class="p-title-ml">Docente:</p><p id="professor" class="p-title-ml-s">{{professor.lastname_p}} {{professor.lastname_s}} {{professor.name}}</p>
 
          <category-app v-for="category in categories" :key="category.id" :data=category></category-app>
          <p class="p-title-ml-s">Recomendación</p>
@@ -61,15 +61,11 @@ export default {
            
                  let userId = this.User.id;
                  this.$http.post('api/saveEvaluation/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
-                 + '/' + userId, this.form).then(response => console.log(response.body))
-                 .catch(error => console.log(error.response.body));
-                 // getting evaluation id for indicators
-                 this.$http.get('api/evaluationId/' + this.$route.params.assignmentId + '/' + this.$route.params.managementId
-                 + '/' + userId).then(response => {
-                 console.log(response.body.id);
-                 //Trigger for child category components arrayDetails
-                 EventBus.$emit('saveIndicators', response.body.id);
-                }).catch(error => console.log(error.response.body));
+                 + '/' + userId, this.form).then(response => {
+                     console.log(response.body);
+                     //Trigger for child category components arrayDetails
+                     EventBus.$emit('saveIndicators', response.body);
+                 }).catch(error => console.log(error.response.body));
                  this.$swal({
                  type: 'success',
                  title: 'Registrado',
@@ -95,9 +91,21 @@ export default {
 </script>
 <style scoped>
 textarea{
-     background-color: lightgrey;
+     border: 1px solid dodgerblue;
+     box-shadow: 0 0 10px #719ECE;
+     border-radius: 6px;
+}
+textarea:focus{
+     outline: none !important;
+     border:1px solid dodgerblue;
+     box-shadow: 0 0 10px #719ECE;
 }
 #professor{
      text-align: center;
+     margin-top: -24px;
+     font-weight: 500;
+}
+#professor-title{
+     font-weight: 500;
 }
 </style>
